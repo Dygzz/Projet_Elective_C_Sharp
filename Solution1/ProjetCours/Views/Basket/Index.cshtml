@@ -1,0 +1,46 @@
+﻿@model ProjetCours.Models.BasketViewModel
+@{
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @{this.Write(
+                        Html.DisplayNameForInnerType<ProjetCours.Models.Car, string>(x => x.Mark));
+                }
+            </th>
+           
+            <th>
+                Nombre d'article
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Cars)
+        {
+        <tr>
+            <td>
+                @item.Car.Mark
+            </td>
+            <td>
+                @item.Car.Model
+            </td>
+            <td>
+                @item.Car.Price
+            </td>
+            <td>
+                @item.Car.FuelType.Label
+            </td>
+            <td>
+                @item.Car.Autonomous
+            </td>
+            <td>
+                @item.Count
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+    
