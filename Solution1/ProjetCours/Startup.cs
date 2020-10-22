@@ -33,6 +33,11 @@ namespace ProjetCours
             .UseSqlServer(Configuration.GetConnectionString("ProjetCoursContext")));
             services.AddSession();
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ProjetCoursContext>();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Login";
+                options.LoginPath = "/Login";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

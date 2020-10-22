@@ -9,7 +9,7 @@ namespace ProjetCours.Models
     public class Basket
     {
         public Dictionary<int, int> Cars { get; set; } = new Dictionary<int, int>();
-
+        
         public void AddCar(int idCar)
         {
             if (Cars.ContainsKey(idCar))

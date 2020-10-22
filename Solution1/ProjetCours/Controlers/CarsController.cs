@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,7 @@ namespace ProjetCours.Controlers
         }
 
         // GET: Cars/Create
+        [Authorize]
         public async Task<IActionResult> Create()
         {
             //ViewBag.Fuels = await _context.Fuel.ToListAsync();
@@ -57,6 +59,7 @@ namespace ProjetCours.Controlers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("ID,Mark,Model,Price,FuelTypeId,Autonomous")] Car car)
         {
             if(car?.Mark?.ToLower() == "peugeot")
@@ -73,6 +76,7 @@ namespace ProjetCours.Controlers
         }
 
         // GET: Cars/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -96,6 +100,7 @@ namespace ProjetCours.Controlers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Mark,Model,Price,FuelTypeId,Autonomous")] Car car)
         {
             if (id != car.ID)
@@ -128,6 +133,7 @@ namespace ProjetCours.Controlers
         }
 
         // GET: Cars/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -148,6 +154,7 @@ namespace ProjetCours.Controlers
         // POST: Cars/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var car = await _context.Car.FindAsync(id);
