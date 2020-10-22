@@ -11,6 +11,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using ProjetCours.Data;
 using Serilog;
+using ProjetCours.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace ProjetCours
 {
@@ -30,6 +32,7 @@ namespace ProjetCours
             .UseLoggerFactory(ProjetCoursContext.SqlLoger) 
             .UseSqlServer(Configuration.GetConnectionString("ProjetCoursContext")));
             services.AddSession();
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ProjetCoursContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +48,9 @@ namespace ProjetCours
             app.UseRouting();
 
             app.UseSession();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
