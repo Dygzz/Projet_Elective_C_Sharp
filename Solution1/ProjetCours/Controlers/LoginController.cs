@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Schema;
 using ProjetCours.Data;
@@ -61,7 +63,7 @@ namespace ProjetCours.Controlers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Index([Bind("userName, email, password")] RegisterViewModel register)
+        public async Task<IActionResult> Login([Bind("userName, email, password")] RegisterViewModel register)
         {
             if (ModelState.IsValid)
             {
@@ -86,12 +88,18 @@ namespace ProjetCours.Controlers
             _logger.LogInformation("User logged out.");
             if (returnUrl != null)
             {
-                return LocalRedirect("~/");
+                return LocalRedirect("~/Login");
             }
             else
             {
                 return LocalRedirect("~/");
             }
+        }
+
+        public async Task<IActionResult> List()
+        {
+            ViewBag.Users = await _userManager.Users.ToListAsync();
+            return View();
         }
 
     }
