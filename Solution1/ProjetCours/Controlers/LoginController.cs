@@ -80,5 +80,19 @@ namespace ProjetCours.Controlers
 
         }
 
+        public async Task<IActionResult> Disconnect(string returnUrl = null)
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+            if (returnUrl != null)
+            {
+                return LocalRedirect("~/");
+            }
+            else
+            {
+                return LocalRedirect("~/");
+            }
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,7 @@ namespace ProjetCours.Controlers
         }
 
         // GET: Fuels/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -66,6 +68,7 @@ namespace ProjetCours.Controlers
         }
 
         // GET: Fuels/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +89,7 @@ namespace ProjetCours.Controlers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Label")] Fuel fuel)
         {
             if (id != fuel.ID)
@@ -117,6 +121,7 @@ namespace ProjetCours.Controlers
         }
 
         // GET: Fuels/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +142,7 @@ namespace ProjetCours.Controlers
         // POST: Fuels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var fuel = await _context.Fuel.FindAsync(id);
