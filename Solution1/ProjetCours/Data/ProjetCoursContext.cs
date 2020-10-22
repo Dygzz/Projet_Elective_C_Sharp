@@ -6,10 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using ProjetCours.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ProjetCours.Data
 {
-    public class ProjetCoursContext : DbContext
+    public class ProjetCoursContext : IdentityDbContext
     {
 
         public static readonly ILoggerFactory SqlLoger = LoggerFactory.Create(builder => { builder.AddConsole(); });
